@@ -13,7 +13,7 @@ from kuhsag.commands import *
 import io
 import contextlib
 import logging
-logger = logging.getLogger('django')
+logger = logging.getLogger(__name__)
 
 import cowsay
 from uuid import uuid4

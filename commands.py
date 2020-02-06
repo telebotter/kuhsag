@@ -17,6 +17,10 @@ def cowify(text, func=cowsay.cow):
     return string
 
 
+def asciify():
+    pass
+
+
 def start(bot, update):
     # get or create + logging
     #text = f'<code>{cowsay.cow(MESSAGES["start"])}</code>'
