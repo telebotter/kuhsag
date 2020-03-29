@@ -2,11 +2,24 @@ import logging
 import cowsay
 import io
 import contextlib
+import random
 
+from tudel_dict import tudel
 
 #logging.basicConfig(filename='/home/django/telebotter/wuerfeln/commands.log',level=logging.DEBUG)
 from kuhsag.constants import *
 commands = []
+
+def tuedelize(text):
+    message = list(text)
+    reply = []
+    for i in message:
+        if i in tudel:
+            reply.append(random.choice(tudel[i]))
+        else:
+            reply.append(i)
+    reply = ''.join(reply)
+    return reply
 
 def cowify(text, func=cowsay.cow):
     """ catches the output of cowsay commands and converts it to a string """

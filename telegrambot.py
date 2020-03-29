@@ -25,6 +25,7 @@ def error(bot, update, error):
 speakers = [
     {'name': 'Kuh', 'func': cowsay.cow, 'emoj': '🐄'},
     {'name': 'Tux', 'func': cowsay.tux, 'emoj': '🐧'},
+    {'name': 'Tüdelizer', 'func': tuedelize, 'emoji': '🥴'},
 ]
 
 def inlinequery(bot, update):
