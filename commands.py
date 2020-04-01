@@ -4,7 +4,7 @@ import io
 import contextlib
 import random
 
-from tudel_dict import tudel
+from kuhsag.tudel_dict import tudel
 
 #logging.basicConfig(filename='/home/django/telebotter/wuerfeln/commands.log',level=logging.DEBUG)
 from kuhsag.constants import *
@@ -15,11 +15,14 @@ def tuedelize(text):
     reply = []
     for i in message:
         if i in tudel:
-            reply.append(random.choice(tudel[i]))
+            # reply.append(random.choice(tudel[i]))
+            # return i if i is not in dict
+            reply.append(random.choice(tudel.get(i, i)))
         else:
             reply.append(i)
     reply = ''.join(reply)
     return reply
+
 
 def cowify(text, func=cowsay.cow):
     """ catches the output of cowsay commands and converts it to a string """

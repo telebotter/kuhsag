@@ -23,8 +23,8 @@ def error(bot, update, error):
 
 
 speakers = [
-    {'name': 'Kuh', 'func': cowsay.cow, 'emoj': '🐄'},
-    {'name': 'Tux', 'func': cowsay.tux, 'emoj': '🐧'},
+    {'name': 'Kuh', 'func': cowsay.cow, 'emoji': '🐄', 'wrap': True},
+    {'name': 'Tux', 'func': cowsay.tux, 'emoji': '🐧', 'wrap': True},
     {'name': 'Tüdelizer', 'func': tuedelize, 'emoji': '🥴'},
 ]
 
@@ -32,11 +32,15 @@ def inlinequery(bot, update):
     query = update.inline_query.query
     options = []
     for speaker in speakers:
-        cowtext = cowify(query, func=speaker['func'])
+        if speaker.get('wrap', False):
+            cowtext = cowify(query, func=speaker['func'])
+        else:
+            cowtext = speaker['func'](query)
+            print(cowtext)
         options.append(
             InlineQueryResultArticle(
                 #title=f'{speaker["emoj"]} {speaker["name"]} sagt:',
-                title= speaker['emoj'] +' '+ speaker['name'],
+                title=speaker['emoji']+' '+speaker['name'],
                 id=uuid4(),
                 description=query,
                 input_message_content = InputTextMessageContent(f'```{cowtext}```', parse_mode='Markdown')
@@ -50,6 +54,7 @@ def inlinequery(bot, update):
 def main():
     logger.info("Loading handlers for kuhsagbot")
     dp = DjangoTelegramBot.getDispatcher('kuhsagbot')
+    # dp = DjangoTelegramBot.getDispatcher('telebotterbot')
     for cmd in commands:
         pass_args = cmd.pass_args if hasattr(cmd, 'pass_args') else False
         name = cmd.command if hasattr(cmd, 'command') else cmd.__name__
