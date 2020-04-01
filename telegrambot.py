@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 speakers = [
     {'name': 'Kuh', 'func': cowsay.cow, 'emoji': '🐄', 'wrap': True},
     {'name': 'Tux', 'func': cowsay.tux, 'emoji': '🐧', 'wrap': True},
-    {'name': 'Tüdelizer', 'func': tuedelize, 'emoji': '🥴'},
+    {'name': 'Tüdelizer', 'func': tuedelize, 'emoji': '👨‍🎨'},
 ]
 
 
