@@ -14,12 +14,7 @@ def tuedelize(text):
     message = list(text)
     reply = []
     for i in message:
-        if i in tudel:
-            # reply.append(random.choice(tudel[i]))
-            # return i if i is not in dict
-            reply.append(random.choice(tudel.get(i, i)))
-        else:
-            reply.append(i)
+        reply.append(random.choice(tudel.get(i, i)))
     reply = ''.join(reply)
     return reply
 
