@@ -21,8 +21,8 @@ from uuid import uuid4
 
 logger = logging.getLogger(__name__)
 speakers = [
-    {'name': 'Kuh', 'func': cowsay.cow, 'emoji': '🐄', 'wrap': True},
-    {'name': 'Tux', 'func': cowsay.tux, 'emoji': '🐧', 'wrap': True},
+    {'name': 'Kuh', 'func': cowsay.cow, 'emoji': '🐄', 'wrap': True, 'code': True},
+    {'name': 'Tux', 'func': cowsay.tux, 'emoji': '🐧', 'wrap': True, 'code': True},
     {'name': 'Tüdelizer', 'func': tuedelize, 'emoji': '👨‍🎨'},
 ]
 
@@ -45,13 +45,18 @@ def inlinequery(bot, update):
         else:
             cowtext = speaker['func'](query)
             print(cowtext)
+        if speaker.get('code', False):
+            input_message_content = InputTextMessageContent(f'```{cowtext}```', parse_mode='Markdown')
+        else:
+            input_message_content = InputTextMessageContent(f'{cowtext}', parse_mode=None)
+
         options.append(
             InlineQueryResultArticle(
                 #title=f'{speaker["emoj"]} {speaker["name"]} sagt:',
                 title=speaker['emoji']+' '+speaker['name'],
                 id=uuid4(),
                 description=query,
-                input_message_content = InputTextMessageContent(f'```{cowtext}```', parse_mode='Markdown')
+                input_message_content=input_message_content,
             )
     )
     logger.debug(f'answered with {len(options)} options')
