@@ -67,7 +67,7 @@ def inlinequery(bot, update):
 
 def main():
     logger.debug("Loading handlers for kuhsagbot")
-    dp = DjangoTelegramBot.getDispatcher('telebotterbot')
+    dp = DjangoTelegramBot.getDispatcher('kuhsagbot')
     # dp = DjangoTelegramBot.getDispatcher('telebotterbot')
     for cmd in commands:
         pass_args = cmd.pass_args if hasattr(cmd, 'pass_args') else False
